@@ -1,6 +1,6 @@
 {
   "name": "@huttunenjulius/packagelist",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Utility to check dependencies",
   "main": "app.js",
   "scripts": {
