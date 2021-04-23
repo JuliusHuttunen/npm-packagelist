@@ -1,0 +1,11 @@
+{
+  "name": "@huttunenjulius/packagelist",
+  "version": "1.0.2",
+  "description": "Utility to check dependencies",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
