@@ -16,7 +16,7 @@ Function | Action
 ## Example:
 
 ```
-manager.js
+//manager.js
 
 const manager = require("@huttunenjulius/packagelist");
 
