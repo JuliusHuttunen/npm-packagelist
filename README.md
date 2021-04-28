@@ -10,9 +10,9 @@ Function | Action
 `Install(package)` | Same as uninstall, but installs the package(s).
 `AllDeps()` | Creates a text file with all installed dependencies.
 
-# Installation: `npm install @huttunenjulius/packagelist`
+## Installation: `npm install @huttunenjulius/packagelist`
 
-# Example:
+## Example:
 
 ```
 manager.js
