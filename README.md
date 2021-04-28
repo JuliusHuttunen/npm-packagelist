@@ -25,6 +25,8 @@ manager.FindDep();
 manager.Uninstall("");
 manager.Install("");
 manager.AllDeps();
+
+// Run "node manager" in terminal
 ```
 
 
