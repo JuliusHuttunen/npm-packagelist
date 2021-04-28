@@ -14,7 +14,7 @@ Installation: `npm install @huttunenjulius/packagelist`
 
 Example:
 
-`
+```
 manager.js
 
 const manager = require("@huttunenjulius/packagelist");
@@ -25,6 +25,6 @@ manager.FindDep();
 manager.Uninstall("");
 manager.Install("");
 manager.AllDeps();
-`
+```
 
 
