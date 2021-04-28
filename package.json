@@ -1,11 +1,22 @@
 {
   "name": "@huttunenjulius/packagelist",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Utility to check dependencies",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "huttunenjulius",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuliusHuttunen/npm-packagelist.git"
+  },
+  "keywords": [
+    "execSync"
+  ],
+  "bugs": {
+    "url": "https://github.com/JuliusHuttunen/npm-packagelist/issues"
+  },
+  "homepage": "https://github.com/JuliusHuttunen/npm-packagelist#readme"
 }
