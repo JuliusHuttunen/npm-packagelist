@@ -12,4 +12,19 @@ Function | Action
 
 Installation: `npm install @huttunenjulius/packagelist`
 
+Example:
+
+`
+manager.js
+
+const manager = require("@huttunenjulius/packagelist");
+
+manager.ShowAll(); 
+manager.ShowChildDep();
+manager.FindDep();
+manager.Uninstall("");
+manager.Install("");
+manager.AllDeps();
+`
+
 
