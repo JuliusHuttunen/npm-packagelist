@@ -85,7 +85,7 @@ exports.ShowChildDep = function (query) {
     }
 
     //Nollataan lokitiedosto
-    fs.writeFileSync("./mydeps.txt", "");
+    fs.writeFileSync("./mydeps.txt", "INSTALLED CHILD DEPENDENCIES: \n-------------------------------------------");
 
     let searchArray = [];
 
@@ -108,7 +108,6 @@ exports.ShowChildDep = function (query) {
     }
 
     let isDepArray = false;
-    let fileName;
 
     //Käydään läpi filteroitu taulukko...
     for (const key in filtered) {
@@ -121,7 +120,6 @@ exports.ShowChildDep = function (query) {
         //Jos riippuvuustaulukossa on objekteja, niin tulostetaan ne
         if (depArray.length > 0) {
             isDepArray = true;
-            fileName = filtered[key].key;
             fs.writeFileSync("mydeps.txt", "Dependency " + filtered[key].key[0].toUpperCase() + filtered[key].key.slice(1) +
                 " (version " + filtered[key].version + ") has the following child dependencies: \n\n", {
                 encoding: "utf8",
@@ -206,4 +204,75 @@ exports.Install = function (package) {
         execSync('npm install ' + packageArr[key].toLowerCase(), { encoding: 'utf-8' });
         console.log("Installation of the package " + packageArr[key] + " was successful!\n");
     }
+}
+
+exports.AllDeps = function () {
+
+    console.log("Printing every installed dependency on the text file all.txt...\n");
+
+    //Suoritetaan komento terminaalissa
+    const execSync = require('child_process').execSync;
+    const data = execSync('npm list --prod --depth=1 --json', { encoding: 'utf-8' });
+    const package = JSON.parse(data);
+    const d = package.dependencies;
+
+    //Nollataan lokitiedosto
+    fs.writeFileSync("./all.txt", "INSTALLED DEPENDENCIES: \n-------------------------------------------");
+
+    let isDepArray = false;
+
+    //Käydään läpi taulukko...
+    for (const key in d) {
+        let depArray = [];
+        i = 0;
+
+        //Kirjoitetaan korkeatasoiset riippuuvudet tiedostoon
+        fs.writeFileSync("./all.txt", "\nDependency name: " + key[0].toUpperCase() + key.slice(1) + "\n",
+            {
+                encoding: "utf8",
+                flag: "a+",
+                mode: 0o666
+            });
+        fs.writeFileSync("./all.txt", "Version: " + d[key].version + "\n",
+            {
+                encoding: "utf8",
+                flag: "a+",
+                mode: 0o666
+            });
+
+        //Lisätään arvoja riippuvuustaulukkoon
+        if (d[key].dependencies != undefined) {
+            depArray.push(d[key].dependencies);
+        }
+        //Jos lapsiriippuvuuksia on:
+        if (depArray.length > 0) {
+            isDepArray = true;
+            fs.writeFileSync("./all.txt", "\nDependency " + key[0].toUpperCase() + key.slice(1) + " has the following child dependencies: \n\n", {
+                encoding: "utf8",
+                flag: "a+",
+                mode: 0o666
+            });
+            //Riippuvuudet kirjoitetaan erilliseen txt-tiedostoon
+            for (const key in depArray[0]) {
+                i++;
+                fs.writeFileSync("./all.txt", i + ". Child dependency name: " + key[0].toUpperCase() + key.slice(1) + "\n", {
+                    encoding: "utf8",
+                    flag: "a+",
+                    mode: 0o666
+                });
+                //Versionumerot
+                fs.writeFileSync("./all.txt", "   Version: " + depArray[0][key].version + "\n", {
+                    encoding: "utf8",
+                    flag: "a+",
+                    mode: 0o666
+                });
+            }
+        }
+    }
+
+    //Jos riippuvuustaulukko on tyhjä, annetaan ilmoitus
+    if (!isDepArray && d === undefined) {
+        console.log("You don't have any dependencies installed.\n");
+    }
+    console.log("All.txt was created! \n");
 }
